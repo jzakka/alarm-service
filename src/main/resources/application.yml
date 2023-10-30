@@ -4,28 +4,15 @@ server:
     include-message: always
 spring:
   application:
-    name: chat-service
+    name: alarm-service
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/moiza-msa
-  kafka:
-    topic-name: chats
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      bootstrap-servers: localhost:9092
-      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      group-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-      properties:
-        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
-        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.value.default.type: com.example.chatservice.dto.ChatDto
+  sendgrid:
+    api-key: ${SENDGRID_MOIZA}
+
+email:
+  from: test123@test.com
 
 eureka:
   instance:
@@ -39,11 +26,3 @@ eureka:
 token:
   expiration_time: 21600000 # 60 * 60 * 6 * 1000=> 6시간
   secret: testtoken # TODO 설정 파일 보안정보 옮기기
-
-page:
-  size: 20
-
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.web.socket: DEBUG
