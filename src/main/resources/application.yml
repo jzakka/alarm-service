@@ -9,7 +9,7 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
   sendgrid:
-    api-key: ${SENDGRID_MOIZA}
+    api-key: apikey
   kafka:
     topic-name: alarms
     consumer:
@@ -23,7 +23,7 @@ spring:
         spring.json.value.default.type: com.example.alarmservice.vo.RequestAlarm
 
 email:
-  from: ${MAIL_SENDER}
+  from: test@email.com
 
 eureka:
   instance:
